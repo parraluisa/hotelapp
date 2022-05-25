@@ -1,0 +1,22 @@
+.root
+{
+    -fx-background-color: #e8f4f8;
+}
+
+#title
+{
+    -fx-alignment: center;
+    -fx-font-family: "Times New Roman";
+    -fx-font-size: 40;
+}
+#parent
+{
+    -fx-alignment: center;
+}
+
+.label
+{
+    -fx-alignment: center;
+    -fx-font-size: 20;
+}
+
