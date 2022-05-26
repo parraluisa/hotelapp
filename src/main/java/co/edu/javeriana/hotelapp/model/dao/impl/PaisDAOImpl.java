@@ -41,7 +41,7 @@ public class PaisDAOImpl implements PaisDAO {
         }
         }
         catch (SQLException ex) {
-            Logger.getLogger(PaisDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(LogInDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
             return null;
 
         }
@@ -69,7 +69,7 @@ public class PaisDAOImpl implements PaisDAO {
                     return null;
             }
         } catch (SQLException ex) {
-            Logger.getLogger(PaisDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(LogInDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
     }
@@ -93,7 +93,7 @@ public class PaisDAOImpl implements PaisDAO {
                     return null;
             }
         } catch (SQLException ex) {
-            Logger.getLogger(PaisDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(LogInDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
     }
@@ -121,7 +121,7 @@ public class PaisDAOImpl implements PaisDAO {
                 return null;
             }
         } catch (SQLException ex) {
-            Logger.getLogger(PaisDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(LogInDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
     }
@@ -154,7 +154,7 @@ public class PaisDAOImpl implements PaisDAO {
                 return null;
             }
         } catch (SQLException ex) {
-            Logger.getLogger(PaisDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(LogInDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
     }
@@ -174,7 +174,7 @@ public class PaisDAOImpl implements PaisDAO {
             return num;
 
         } catch (SQLException ex) {
-            Logger.getLogger(PaisDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(LogInDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
     }
