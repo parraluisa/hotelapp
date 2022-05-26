@@ -19,7 +19,9 @@
       <Label fx:id="title" layoutY="37.0" prefHeight="17.0" prefWidth="1000.0" text="Pais" />
       <Pane layoutX="15.0" layoutY="120" prefHeight="645.0" prefWidth="79.0" styleClass="pane">
          <children>
-            <Button layoutX="14.0" layoutY="75" mnemonicParsing="false" text="Insert" />
+
+            <Button layoutX="14.0" layoutY="75" mnemonicParsing="false" text="Insert" onMouseClicked="#insertar"/>
+
             <Button layoutX="14.0" layoutY="236.25" mnemonicParsing="false" onMouseClicked="#edit" text="Edit" />
             <Button layoutX="14.0" layoutY="397.5" mnemonicParsing="false" text="Button" />
             <Button layoutX="14.0" layoutY="558.75" mnemonicParsing="false" text="Button" />
@@ -41,6 +43,9 @@
             <RadioButton fx:id="impuesto1" layoutX="206.0" layoutY="159.0" mnemonicParsing="false" text="IVA" visible="false" />
             <RadioButton fx:id="impuesto2" layoutX="378.0" layoutY="159.0" mnemonicParsing="false" text="Porcentaje cons" visible="false" />
             <Button layoutX="223.0" layoutY="203.0" mnemonicParsing="false" text="Confirmar" visible="false" fx:id="confirmar" onMouseClicked="#confirmar"/>
+
+            <Button layoutX="224.0" layoutY="389.0" mnemonicParsing="false" onMouseClicked="#pushedit" text="Submit" fx:id="submit2" visible="false"/>
+
          </children></Pane>
       <Button layoutX="474.0" layoutY="753.0" mnemonicParsing="false" onMouseClicked="#exit" text="Exit" />
    </children>
