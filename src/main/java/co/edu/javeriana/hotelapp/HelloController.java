@@ -51,7 +51,9 @@ public class HelloController {
     @FXML
     private Label error_reg;
 
-
+//loginDTO p1= new LoginDTO(username_reg, password_reg);
+    //loginDAO ldao= new loginDAOimpl();
+    //loginDTO p2= ldao.create(p1);
 
     @FXML
     protected void gettext_log() throws Exception {
@@ -199,11 +201,12 @@ public class HelloController {
 
         try
         {
-            FXMLLoader fxmlLoader= new FXMLLoader(getClass().getResource("telefono-view.fxml"));
-            Parent root1=(Parent) fxmlLoader.load();
+            Parent root = FXMLLoader.load(HelloApplication.class.getResource("pais-view.fxml"));
+            Scene scene = new Scene(root);
+            scene.getStylesheets().add(getClass().getResource("pais.css").toExternalForm());
             Stage stage= new Stage();
-            stage.setTitle("Telefono");
-            stage.setScene(new Scene(root1));
+            stage.setTitle("Pais");
+            stage.setScene(scene);
             stage.show();
         }
         catch (Exception e)
