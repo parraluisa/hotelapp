@@ -1,7 +1,7 @@
 package co.edu.javeriana.hotelapp.model.dao.impl;
 
-import co.edu.javeriana.hotelapp.model.dao.PaisDAO;
-import co.edu.javeriana.hotelapp.model.dto.PaisDTO;
+import co.edu.javeriana.hotelapp.model.dao.CategoriaDAO;
+import co.edu.javeriana.hotelapp.model.dto.CategoriaDTO;
 import co.edu.javeriana.hotelapp.util.Oracle;
 
 import java.sql.ResultSet;
@@ -12,50 +12,49 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class PaisDAOImpl implements PaisDAO {
+public class CategoriaDAOimpl implements CategoriaDAO {
 
     public final Oracle oracle;
 
-    public PaisDAOImpl(){
+    public CategoriaDAOimpl(){
         this.oracle= new Oracle();
     }
+
     @Override
-    public PaisDTO create(PaisDTO pais) {
+    public CategoriaDTO create(CategoriaDTO categoria) {
         try {
             this.oracle.conectar();
-            String query="Insert into pais_p2(nombre, imptur, iva, impcons) values("
-                    +"'"+pais.getNombre()+"',"
-                    +pais.getImpNacTur()+","
-                    + pais.getIva()+","
-                    + pais.getImpCons()+");";
+            String query="Insert into categoria_p2(estrellas, descripcion, sobrecosto) values("
+                    +"'"+categoria.getNumEstrellas()+"',"
+                    +categoria.getDescripcion()+","
+                    +categoria.getSobrecosto()+");";
             Statement stmt = this.oracle.getConnection().createStatement();
             int code= stmt.executeUpdate(query);
             stmt.close();
             this.oracle.desconectar();
             switch (code) {
                 case 1:
-                    System.out.println("Se creo el pais");
-                    return findByName(pais.getNombre());
+                    System.out.println("Se creo la categoria");
+                    return findByNum(categoria.getNumEstrellas());
                 default:
                     return null;
-        }
+            }
         }
         catch (SQLException ex) {
-            Logger.getLogger(PaisDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CategoriaDAOimpl.class.getName()).log(Level.SEVERE, null, ex);
             return null;
 
         }
     }
 
     @Override
-    public PaisDTO edit(String nombre, PaisDTO pais) {
+    public CategoriaDTO edit(Integer numEstrellas, CategoriaDTO categoria) {
         try {
             this.oracle.conectar();
-            String query = "update pais_p2 set "
-                    +"nombre ="+ pais.getNombre()+","
-                    +" imptur ="+ "'" + pais.getImpNacTur() + "',"
-                    +"iva ="+ "'" + pais.getIva() + "',"
-                    +"impcons ="+ "'" + pais.getImpCons() + "' where nombre ='"+nombre+"';";
+            String query = "update categoria_p2 set "
+                    +"estrellas ="+ categoria.getNumEstrellas()+","
+                    +" descripcion ="+ "'" + categoria.getDescripcion() + "',"
+                    +"sobrecosto ="+ "'" + categoria.getSobrecosto() + "' where estrellas ='"+numEstrellas+"';";
             System.out.println(query);
             Statement stmt = this.oracle.getConnection().createStatement();
             int code = stmt.executeUpdate(query);
@@ -63,23 +62,24 @@ public class PaisDAOImpl implements PaisDAO {
             this.oracle.desconectar();
             switch (code) {
                 case 1:
-                    System.out.println("Se actualizo el pais");
-                    return findByName(pais.getNombre());
+                    System.out.println("Se actualizo la categoria");
+                    return findByNum(categoria.getNumEstrellas());
                 default:
                     return null;
             }
         } catch (SQLException ex) {
-            Logger.getLogger(PaisDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CategoriaDAO.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
+
     }
 
     @Override
-    public Boolean delete(String nombre) {
+    public Boolean delete(Integer numEstrellas) {
         try {
             this.oracle.conectar();
-            String query = "DELETE FROM pais_p2 WHERE nombre='"
-                    + nombre + "';";
+            String query = "DELETE FROM categoria_p2 WHERE estrellas='"
+                    + numEstrellas + "';";
             System.out.println(query);
             Statement stmt = this.oracle.getConnection().createStatement();
             int code = stmt.executeUpdate(query);
@@ -87,66 +87,64 @@ public class PaisDAOImpl implements PaisDAO {
             this.oracle.desconectar();
             switch (code) {
                 case 1:
-                    System.out.println("Se eliminó el pais");
+                    System.out.println("Se eliminó la categoria");
                     return true;
                 default:
                     return null;
             }
         } catch (SQLException ex) {
-            Logger.getLogger(PaisDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CategoriaDAOimpl.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
     }
 
     @Override
-    public PaisDTO findByName(String nombre) {
+    public CategoriaDTO findByNum(Integer numEstrellas) {
         try {
             this.oracle.conectar();
-            String query = "SELECT * FROM pais_p2 WHERE nombre = '" + nombre + "';";
+            String query = "SELECT * FROM categoria_p2 WHERE estrellas = '" + numEstrellas + "';";
             System.out.println(query);
             Statement stmt = this.oracle.getConnection().createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
             ResultSet rs = stmt.executeQuery(query);
             if (rs.first()) {
-                PaisDTO pais = new PaisDTO(
-                        rs.getString("nombre"),
-                        rs.getInt("imptur"),
-                        rs.getInt("iva"),
-                        rs.getShort("impcons"));
+                CategoriaDTO categoria = new CategoriaDTO(
+                        rs.getInt("estrellas"),
+                        rs.getString("descripcion"),
+                        rs.getInt("sobrecosto"));
                 rs.close();
                 stmt.close();
-                return pais;
+                return categoria;
             } else {
                 rs.close();
                 stmt.close();
                 return null;
             }
         } catch (SQLException ex) {
-            Logger.getLogger(PaisDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CategoriaDAOimpl.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
     }
 
     @Override
-    public List<PaisDTO> findAll() {
-        List<PaisDTO> paisesList=new ArrayList<PaisDTO>();
+    public List<CategoriaDTO> findAll() {
+        List<CategoriaDTO> categoriasList=new ArrayList<CategoriaDTO>();
         try {
             this.oracle.conectar();
-            String query = "SELECT * FROM pais_p2;";
+            String query = "SELECT * FROM categoria_p2;";
             System.out.println(query);
             Statement stmt = this.oracle.getConnection().createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
             ResultSet rs = stmt.executeQuery(query);
             if (rs.first()){
                 while (rs.next()) {
-                    PaisDTO pais = new PaisDTO(
-                            rs.getString("nombre"),
-                            rs.getInt("imptur"),
-                            rs.getInt("iva"),
-                            rs.getInt("impcons"));
-                    paisesList.add(pais);
+                    CategoriaDTO categoria = new CategoriaDTO(
+                            rs.getInt("estrellas"),
+                            rs.getString("descripcion"),
+                            rs.getInt("sobrecosto"));
+                    categoriasList.add(categoria);
                 }
                 rs.close();
                 stmt.close();
-                return paisesList;
+                return categoriasList;
             }
             else {
                 rs.close();
@@ -154,7 +152,7 @@ public class PaisDAOImpl implements PaisDAO {
                 return null;
             }
         } catch (SQLException ex) {
-            Logger.getLogger(PaisDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CategoriaDAOimpl.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
     }
@@ -163,7 +161,7 @@ public class PaisDAOImpl implements PaisDAO {
     public Integer count() {
         try {
             this.oracle.conectar();
-            String query = "SELECT COUNT(*) FROM pais_p2;";
+            String query = "SELECT COUNT(*) FROM categoria_p2;";
             System.out.println(query);
             Statement stmt = this.oracle.getConnection().createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
             ResultSet rs = stmt.executeQuery(query);
@@ -174,8 +172,9 @@ public class PaisDAOImpl implements PaisDAO {
             return num;
 
         } catch (SQLException ex) {
-            Logger.getLogger(PaisDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CategoriaDAOimpl.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
+
     }
 }
