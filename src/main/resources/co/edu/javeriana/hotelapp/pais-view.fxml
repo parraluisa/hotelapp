@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -19,7 +20,7 @@
       <Pane layoutX="15.0" layoutY="120" prefHeight="645.0" prefWidth="79.0" styleClass="pane">
          <children>
             <Button layoutX="14.0" layoutY="75" mnemonicParsing="false" text="Insert" />
-            <Button layoutX="14.0" layoutY="236.25" mnemonicParsing="false" text="Button" />
+            <Button layoutX="14.0" layoutY="236.25" mnemonicParsing="false" onMouseClicked="#edit" text="Edit" />
             <Button layoutX="14.0" layoutY="397.5" mnemonicParsing="false" text="Button" />
             <Button layoutX="14.0" layoutY="558.75" mnemonicParsing="false" text="Button" />
          </children>
@@ -28,13 +29,18 @@
          <children>
             <Label layoutX="29.0" layoutY="86.0" styleClass="lid" text="Nombre" />
             <TextField fx:id="name" layoutX="176.0" layoutY="82.0" styleClass="text" />
-            <Label layoutX="29.0" layoutY="159.0" styleClass="lid" text="Porcentaje impuesto" />
+            <Label fx:id="p" layoutX="29.0" layoutY="159.0" styleClass="lid" text="Porcentaje impuesto" />
             <TextField fx:id="percentage" layoutX="176.0" layoutY="155.0" styleClass="text" />
-            <Label layoutX="29.0" layoutY="232.0" styleClass="lid" text="IVA" />
+            <Label fx:id="i" layoutX="29.0" layoutY="232.0" styleClass="lid" text="IVA" />
             <TextField fx:id="iva" layoutX="176.0" layoutY="228.0" styleClass="text" />
-            <Label layoutX="28.0" layoutY="305.0" styleClass="lid" text="Impuesto cons" />
+            <Label fx:id="im" layoutX="28.0" layoutY="305.0" styleClass="lid" text="Impuesto cons" />
             <TextField fx:id="impuesto" layoutX="175.0" layoutY="301.0" styleClass="text" />
-            <Button layoutX="224.0" layoutY="389.0" mnemonicParsing="false" text="Submit" onMouseClicked="#getinsert"/>
+            <Button layoutX="224.0" layoutY="389.0" mnemonicParsing="false" onMouseClicked="#getinsert" text="Submit" fx:id="Submit"/>
+            <Label fx:id="controller" layoutX="33.0" layoutY="23.0" text="Porfavor insertar los datos para agregar el país a la base de datos" />
+            <RadioButton fx:id="Porcentaje" layoutX="29.0" layoutY="159.0" mnemonicParsing="false" text="Porcentaje" visible="false" />
+            <RadioButton fx:id="impuesto1" layoutX="206.0" layoutY="159.0" mnemonicParsing="false" text="IVA" visible="false" />
+            <RadioButton fx:id="impuesto2" layoutX="378.0" layoutY="159.0" mnemonicParsing="false" text="Porcentaje cons" visible="false" />
+            <Button layoutX="223.0" layoutY="203.0" mnemonicParsing="false" text="Confirmar" visible="false" fx:id="confirmar" onMouseClicked="#confirmar"/>
          </children></Pane>
       <Button layoutX="474.0" layoutY="753.0" mnemonicParsing="false" onMouseClicked="#exit" text="Exit" />
    </children>
