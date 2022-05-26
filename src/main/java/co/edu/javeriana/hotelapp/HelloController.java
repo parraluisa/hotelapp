@@ -1,5 +1,8 @@
 package co.edu.javeriana.hotelapp;
 
+import co.edu.javeriana.hotelapp.model.dao.LogInDAO;
+import co.edu.javeriana.hotelapp.model.dao.impl.LogInDAOImpl;
+import co.edu.javeriana.hotelapp.model.dto.LogInDTO;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -12,6 +15,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+
 
 public class HelloController {
     private String username;
@@ -51,9 +55,7 @@ public class HelloController {
     @FXML
     private Label error_reg;
 
-//loginDTO p1= new LoginDTO(username_reg, password_reg);
-    //loginDAO ldao= new loginDAOimpl();
-    //loginDTO p2= ldao.create(p1);
+
 
     @FXML
     protected void gettext_log() throws Exception {
@@ -99,7 +101,16 @@ public class HelloController {
            if(password_reg.equals(re_password_reg))
            {
                error_reg.setVisible(false);
-               System.out.println("The passwords matched you're registered");
+               try
+               {
+                   LogInDTO logdto= new LogInDTO(username_reg,password_reg);
+                   LogInDAO logdao= new LogInDAOImpl();
+                   LogInDTO p2= logdao.create(logdto);
+               }
+               catch (Exception e)
+               {
+                   System.out.println(e.getLocalizedMessage());
+               }
            }
            else
            {
