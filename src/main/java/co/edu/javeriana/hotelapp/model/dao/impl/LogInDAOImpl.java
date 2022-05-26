@@ -37,7 +37,6 @@ public class LogInDAOImpl implements LogInDAO {
         catch (SQLException ex) {
             Logger.getLogger(LogInDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
             return null;
-
         }
     }
     @Override

@@ -14,6 +14,10 @@ public class PaisView {
     private boolean insert=true;
     private boolean edit=false;
 
+    private boolean por;
+    private boolean imp1;
+    private boolean imp2;
+
     @FXML
     private TextField name;
     @FXML
@@ -41,6 +45,10 @@ public class PaisView {
     @FXML
     private Button confirmar;
 
+    @FXML
+    private Button submit2;
+
+
 
     protected void vis1(boolean bool)
     {
@@ -64,22 +72,64 @@ public class PaisView {
         vis2(false);
         if(Porcentaje.isSelected()==true)
         {
+
+            this.por=true;
+
             percentage.setVisible(true);
             p.setVisible(true);
         }
         if(impuesto1.isSelected()==true)
         {
+
+            this.imp1=true;
+
             i.setVisible(true);
             iva.setVisible(true);
         }
         if(impuesto2.isSelected()==true)
         {
+
+            this.imp2=true;
             im.setVisible(true);
             impuesto.setVisible(true);
         }
-
         confirmar.setVisible(false);
-        Submit.setVisible(true);
+        submit2.setVisible(true);
+    }
+
+    @FXML
+    protected void pushedit()
+    {
+        this.nombre=name.getText();
+        if(por==true)
+        {
+            this.percent=Integer.parseInt(percentage.getText());
+        }
+        if(por==false)
+        {
+            this.percent=0;
+        }
+        if(imp1==true)
+        {
+            this.IVA=Integer.parseInt(iva.getText());
+        }
+        if(imp1==false)
+        {
+            this.IVA=0;
+        }
+        if(imp2==true)
+        {
+            this.imp=Integer.parseInt(impuesto.getText());
+        }
+        if(imp2==false)
+        {
+            this.imp=0;
+        }
+        System.out.println(nombre);
+        System.out.println(percent);
+        System.out.println(IVA);
+        System.out.println(imp);
+
     }
 
     @FXML
@@ -93,6 +143,20 @@ public class PaisView {
         this.nombre=name.getText();
         controller.setText("Porfavor filtre sus resultados para modificar un valor en la base de datos");
     }
+
+
+    @FXML
+    protected void insertar()
+    {
+        vis1(true);
+        confirmar.setVisible(false);
+        Porcentaje.setVisible(false);
+        impuesto1.setVisible(false);
+        impuesto2.setVisible(false);
+        controller.setText("Porfavor insertar los datos para agregar el país a la base de datos");
+
+    }
+
 
     @FXML
     protected void getinsert()

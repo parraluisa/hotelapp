@@ -71,6 +71,17 @@ public class HelloController {
             {
                 throw new Exception("Cannot leave blank space in password");
             }
+            LogInDTO p1= new LogInDTO(username,password);
+            LogInDAO ldao= new LogInDAOImpl();
+            boolean p2= ldao.encontrarUsuario(username, p1);
+            if(p2==true)
+            {
+                System.out.println("Success");
+            }
+            else
+            {
+                System.out.println("Failed");
+            }
         }
         catch (Exception e)
         {
