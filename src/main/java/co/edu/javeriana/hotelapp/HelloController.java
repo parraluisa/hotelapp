@@ -103,7 +103,7 @@ public class HelloController {
                error_reg.setVisible(false);
                try
                {
-                   LogInDTO logdto= new LogInDTO(username_reg,password_reg);
+                   LogInDTO logdto= new LogInDTO(username_reg.toString(),password_reg.toString());
                    LogInDAO logdao= new LogInDAOImpl();
                    LogInDTO p2= logdao.create(logdto);
                }
@@ -209,14 +209,13 @@ public class HelloController {
 
     @FXML
     protected void pais() throws IOException {
-
         try
         {
-            Parent root = FXMLLoader.load(HelloApplication.class.getResource("pais-view.fxml"));
+            Parent root = FXMLLoader.load(HelloApplication.class.getResource("dir.fxml"));
             Scene scene = new Scene(root);
-            scene.getStylesheets().add(getClass().getResource("pais.css").toExternalForm());
+            scene.getStylesheets().add(getClass().getResource("dir.css").toExternalForm());
             Stage stage= new Stage();
-            stage.setTitle("Pais");
+            stage.setTitle("DIR");
             stage.setScene(scene);
             stage.show();
         }
