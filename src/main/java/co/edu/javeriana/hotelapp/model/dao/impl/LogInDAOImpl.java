@@ -21,7 +21,7 @@ public class LogInDAOImpl implements LogInDAO {
     public LogInDTO create(LogInDTO login) {
         try {
             this.oracle.conectar();
-            String query="Insert into login_p2(user,password) values("
+            String query="Insert into login_p2(usuario,contrasenia) values("
                     +"'"+login.getUser()+"',"
                     +login.getPassword()+");";
             Statement stmt = this.oracle.getConnection().createStatement();
@@ -54,8 +54,8 @@ public class LogInDAOImpl implements LogInDAO {
             ResultSet rs = stmt.executeQuery(query);
             if (rs.first()) {
                 LogInDTO Log = new LogInDTO(
-                        rs.getString("user"),
-                        rs.getString("password"));
+                        rs.getString("usuario"),
+                        rs.getString("contrasenia"));
                 rs.close();
                 stmt.close();
                 if (login.equals(Log)) {
