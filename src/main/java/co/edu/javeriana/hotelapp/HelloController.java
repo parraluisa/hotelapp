@@ -1,10 +1,21 @@
 package co.edu.javeriana.hotelapp;
 
+import co.edu.javeriana.hotelapp.model.dao.LogInDAO;
+import co.edu.javeriana.hotelapp.model.dao.impl.LogInDAOImpl;
+import co.edu.javeriana.hotelapp.model.dto.LogInDTO;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
+
+import java.io.IOException;
+
 
 public class HelloController {
     private String username;
@@ -39,40 +50,79 @@ public class HelloController {
     private Label pass_re_reg;
     @FXML
     private Button reg;
-
+    @FXML
+    private Label error_log;
+    @FXML
+    private Label error_reg;
 
 
 
     @FXML
-    protected void gettext_log()
-    {
+    protected void gettext_log() throws Exception {
+        try
+        {
             this.username=textField.getText();
             this.password=passwordField.getText();
-            if(username==null)
+            if(username=="")
             {
-                System.out.println("null");
+                throw new Exception("Cannot leave blank space in username");
             }
+            if(password=="")
+            {
+                throw new Exception("Cannot leave blank space in password");
+            }
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getLocalizedMessage());
+            error_log.setVisible(true);
+            error_log.setText(e.getLocalizedMessage());
+        }
+
             System.out.println(username);
             System.out.println(password);
     }
     @FXML
     protected void gettext_reg()
     {
-        this.username_reg=textField_reg.getText();
-        this.password_reg=passwordField_reg.getText();
-        this.re_password_reg=re_passwordField.getText();
-        if(username_reg==null)
-        {
-            System.out.println("This is null");
-        }
-        if(password_reg.equals(re_password_reg))
-        {
-            System.out.println("The passwords matched you're registered");
-        }
-        else
-        {
-            System.out.println("The passwords doesn't match, please review the passwords");
-        }
+       try
+       {
+           this.username_reg=textField_reg.getText();
+           this.password_reg=passwordField_reg.getText();
+           this.re_password_reg=re_passwordField.getText();
+           if(username_reg=="")
+           {
+               throw new Exception("Cannot leave blank space in username");
+           }
+           if(password_reg=="")
+           {
+               throw new Exception("Cannot leave blank space in password");
+           }
+           if(password_reg.equals(re_password_reg))
+           {
+               error_reg.setVisible(false);
+               try
+               {
+                   LogInDTO logdto= new LogInDTO(username_reg,password_reg);
+                   LogInDAO logdao= new LogInDAOImpl();
+                   LogInDTO p2= logdao.create(logdto);
+               }
+               catch (Exception e)
+               {
+                   System.out.println(e.getLocalizedMessage());
+               }
+           }
+           else
+           {
+               throw new Exception("Lookout! the passwords doesn't match");
+           }
+       }
+       catch (Exception e)
+       {
+           System.out.println(e.getLocalizedMessage());
+           error_reg.setVisible(true);
+           error_reg.setText(e.getLocalizedMessage());
+       }
         System.out.println(username_reg);
         System.out.println(password_reg);
         System.out.println(re_password_reg);
@@ -93,6 +143,7 @@ public class HelloController {
                 passwordField_reg.setVisible(register);
                 re_passwordField.setVisible(register);
                 reg.setVisible(register);
+                error_reg.setVisible(register);
             }
             catch (Exception e)
             {
@@ -130,6 +181,7 @@ public class HelloController {
                 user_log.setVisible(log_in);
                 pass_log.setVisible(log_in);
                 login.setVisible(log_in);
+                error_log.setVisible(log_in);
             }
             catch (Exception e)
             {
@@ -155,6 +207,23 @@ public class HelloController {
         }
     }
 
+    @FXML
+    protected void pais() throws IOException {
 
+        try
+        {
+            Parent root = FXMLLoader.load(HelloApplication.class.getResource("pais-view.fxml"));
+            Scene scene = new Scene(root);
+            scene.getStylesheets().add(getClass().getResource("pais.css").toExternalForm());
+            Stage stage= new Stage();
+            stage.setTitle("Pais");
+            stage.setScene(scene);
+            stage.show();
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getLocalizedMessage());
+        }
+    }
 
 }

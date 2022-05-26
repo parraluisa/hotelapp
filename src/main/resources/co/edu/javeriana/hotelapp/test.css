@@ -50,3 +50,15 @@
     -fx-border-width: 0px 0px 3px 3px;
 }
 
+#error_log
+{
+    -fx-text-fill: red;
+    -fx-font-size: 14;
+}
+#error_reg
+ {
+    -fx-text-fill: red;
+    -fx-font-size: 14;
+
+}
+

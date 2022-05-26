@@ -1,0 +1,16 @@
+.root
+{
+    -fx-background-color: #ded8c5;
+}
+
+#title
+{
+    -fx-alignment: center;
+    -fx-font-family: "Times New Roman";
+    -fx-font-size: 40;
+}
+
+#pane {
+    -fx-border-color: #a9a291;
+    -fx-border-width: 3px;
+}

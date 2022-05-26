@@ -9,8 +9,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-
 <AnchorPane fx:id="parent" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.javeriana.hotelapp.HelloController">
     <children>
         <Label fx:id="title" layoutX="2.0" layoutY="30.0" prefHeight="46.0" prefWidth="1000.0" text="Overton hotel">
@@ -18,7 +16,7 @@
                 <Font size="31.0" />
             </font>
         </Label>
-        <Label layoutX="238.0" layoutY="302.0" onMouseClicked="#vis_log" prefHeight="17.0" prefWidth="149.0" styleClass="label" text="Iniciar sesión" fx:id="iniciar"/>
+        <Label fx:id="iniciar" layoutX="238.0" layoutY="302.0" onMouseClicked="#vis_log" prefHeight="17.0" prefWidth="149.0" styleClass="label" text="Iniciar sesión" />
         <Label fx:id="user_log" layoutX="230.0" layoutY="369.0" prefHeight="17.0" prefWidth="149.0" styleClass="label" text="Username" />
         <Label fx:id="pass_log" layoutX="230.0" layoutY="415.0" prefHeight="17.0" prefWidth="149.0" styleClass="label" text="Password" />
       <ImageView fitHeight="115.0" fitWidth="115.0" layoutX="-8.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="-8.0">
@@ -29,14 +27,18 @@
       <TextField fx:id="textField" layoutX="426.0" layoutY="374.0" styleClass="text" />
       <PasswordField fx:id="passwordField" layoutX="426.0" layoutY="423.0" styleClass="text" />
       <Button fx:id="login" layoutX="474.0" layoutY="467.0" mnemonicParsing="false" onMouseClicked="#gettext_log" styleClass="text" text="Log in!" />
-      <Label layoutX="406.0" layoutY="302.0" onMouseClicked="#vis_reg" prefHeight="17.0" prefWidth="149.0" styleClass="label" text="Registrarte" fx:id="registrarse"/>
-        <Label fx:id="user_reg" layoutX="230.0" layoutY="369.0" prefHeight="17.0" prefWidth="149.0" styleClass="label" text="Username" visible="false"/>
-        <Label fx:id="pass_reg" layoutX="230.0" layoutY="415.0" prefHeight="17.0" prefWidth="149.0" styleClass="label" text="Password" visible="false"/>
-        <Label fx:id="pass_re_reg" layoutX="200.0" layoutY="467.0" prefHeight="17.0" prefWidth="149.0" styleClass="label" text="Confirm password" visible="false"/>
-        <PasswordField fx:id="re_passwordField" layoutX="426.0" layoutY="472.0" styleClass="text" visible="false"/>
-        <TextField fx:id="textField_reg" layoutX="426.0" layoutY="374.0" styleClass="text" visible="false"/>
-        <PasswordField fx:id="passwordField_reg" layoutX="426.0" layoutY="423.0" styleClass="text" visible="false"/>
-        <Button fx:id="reg" layoutX="474.0" layoutY="515.0" mnemonicParsing="false" onMouseClicked="#gettext_reg" styleClass="text" text="Register!" visible="false"/>
+      <Label fx:id="registrarse" layoutX="406.0" layoutY="302.0" onMouseClicked="#vis_reg" prefHeight="17.0" prefWidth="149.0" styleClass="label" text="Registrarte" />
+        <Label fx:id="user_reg" layoutX="230.0" layoutY="369.0" prefHeight="17.0" prefWidth="149.0" styleClass="label" text="Username" visible="false" />
+        <Label fx:id="pass_reg" layoutX="230.0" layoutY="415.0" prefHeight="17.0" prefWidth="149.0" styleClass="label" text="Password" visible="false" />
+        <Label fx:id="pass_re_reg" layoutX="200.0" layoutY="467.0" prefHeight="17.0" prefWidth="149.0" styleClass="label" text="Confirm password" visible="false" />
+        <PasswordField fx:id="re_passwordField" layoutX="426.0" layoutY="472.0" styleClass="text" visible="false" />
+        <TextField fx:id="textField_reg" layoutX="426.0" layoutY="374.0" styleClass="text" visible="false" />
+        <PasswordField fx:id="passwordField_reg" layoutX="426.0" layoutY="423.0" styleClass="text" visible="false" />
+        <Button fx:id="reg" layoutX="474.0" layoutY="515.0" mnemonicParsing="false" onMouseClicked="#gettext_reg" styleClass="text" text="Register!" visible="false" />
+      <Label fx:id="error_log" layoutX="380.0" layoutY="510" text="Label" visible="false" />
+        <Label fx:id="error_reg" layoutX="380" layoutY="550.0" text="Label" visible="false" />
+      <Button layoutX="476.0" layoutY="672.0" mnemonicParsing="false" text="Button" onMouseClicked="#pais"/>
+
 
     </children>
 </AnchorPane>
