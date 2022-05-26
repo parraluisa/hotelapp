@@ -24,4 +24,22 @@ public class LogInDTO {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof LogInDTO)) return false;
+
+        LogInDTO logInDTO = (LogInDTO) o;
+
+        if (!getUser().equals(logInDTO.getUser())) return false;
+        return getPassword().equals(logInDTO.getPassword());
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getUser().hashCode();
+        result = 31 * result + getPassword().hashCode();
+        return result;
+    }
 }
