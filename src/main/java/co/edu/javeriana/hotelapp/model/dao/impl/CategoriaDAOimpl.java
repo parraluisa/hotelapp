@@ -27,7 +27,7 @@ public class CategoriaDAOimpl implements CategoriaDAO {
             String query="Insert into categoria_p2(estrellas, descripcion, sobrecosto) values("
                     +"'"+categoria.getNumEstrellas()+"',"
                     +categoria.getDescripcion()+","
-                    +categoria.getSobrecosto()+");";
+                    +categoria.getSobrecosto()+")";
             Statement stmt = this.oracle.getConnection().createStatement();
             int code= stmt.executeUpdate(query);
             stmt.close();
@@ -54,7 +54,7 @@ public class CategoriaDAOimpl implements CategoriaDAO {
             String query = "update categoria_p2 set "
                     +"estrellas ="+ categoria.getNumEstrellas()+","
                     +" descripcion ="+ "'" + categoria.getDescripcion() + "',"
-                    +"sobrecosto ="+ "'" + categoria.getSobrecosto() + "' where estrellas ='"+numEstrellas+"';";
+                    +"sobrecosto ="+ "'" + categoria.getSobrecosto() + "' where estrellas ='"+numEstrellas+"'";
             System.out.println(query);
             Statement stmt = this.oracle.getConnection().createStatement();
             int code = stmt.executeUpdate(query);
@@ -79,7 +79,7 @@ public class CategoriaDAOimpl implements CategoriaDAO {
         try {
             this.oracle.conectar();
             String query = "DELETE FROM categoria_p2 WHERE estrellas='"
-                    + numEstrellas + "';";
+                    + numEstrellas + "'";
             System.out.println(query);
             Statement stmt = this.oracle.getConnection().createStatement();
             int code = stmt.executeUpdate(query);
@@ -102,7 +102,7 @@ public class CategoriaDAOimpl implements CategoriaDAO {
     public CategoriaDTO findByNum(Integer numEstrellas) {
         try {
             this.oracle.conectar();
-            String query = "SELECT * FROM categoria_p2 WHERE estrellas = '" + numEstrellas + "';";
+            String query = "SELECT * FROM categoria_p2 WHERE estrellas = '" + numEstrellas + "'";
             System.out.println(query);
             Statement stmt = this.oracle.getConnection().createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
             ResultSet rs = stmt.executeQuery(query);
@@ -130,7 +130,7 @@ public class CategoriaDAOimpl implements CategoriaDAO {
         List<CategoriaDTO> categoriasList=new ArrayList<CategoriaDTO>();
         try {
             this.oracle.conectar();
-            String query = "SELECT * FROM categoria_p2;";
+            String query = "SELECT * FROM categoria_p2";
             System.out.println(query);
             Statement stmt = this.oracle.getConnection().createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
             ResultSet rs = stmt.executeQuery(query);
@@ -161,7 +161,7 @@ public class CategoriaDAOimpl implements CategoriaDAO {
     public Integer count() {
         try {
             this.oracle.conectar();
-            String query = "SELECT COUNT(*) FROM categoria_p2;";
+            String query = "SELECT COUNT(*) FROM categoria_p2";
             System.out.println(query);
             Statement stmt = this.oracle.getConnection().createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
             ResultSet rs = stmt.executeQuery(query);

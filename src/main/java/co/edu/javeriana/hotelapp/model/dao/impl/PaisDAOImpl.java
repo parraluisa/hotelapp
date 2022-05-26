@@ -27,7 +27,7 @@ public class PaisDAOImpl implements PaisDAO {
                     +"'"+pais.getNombre()+"',"
                     +pais.getImpNacTur()+","
                     + pais.getIva()+","
-                    + pais.getImpCons()+");";
+                    + pais.getImpCons()+")";
             Statement stmt = this.oracle.getConnection().createStatement();
             int code= stmt.executeUpdate(query);
             stmt.close();
@@ -55,7 +55,7 @@ public class PaisDAOImpl implements PaisDAO {
                     +"nombre ="+ pais.getNombre()+","
                     +" imptur ="+ "'" + pais.getImpNacTur() + "',"
                     +"iva ="+ "'" + pais.getIva() + "',"
-                    +"impcons ="+ "'" + pais.getImpCons() + "' where nombre ='"+nombre+"';";
+                    +"impcons ="+ "'" + pais.getImpCons() + "' where nombre ='"+nombre+"'";
             System.out.println(query);
             Statement stmt = this.oracle.getConnection().createStatement();
             int code = stmt.executeUpdate(query);
@@ -79,7 +79,7 @@ public class PaisDAOImpl implements PaisDAO {
         try {
             this.oracle.conectar();
             String query = "DELETE FROM pais_p2 WHERE nombre='"
-                    + nombre + "';";
+                    + nombre + "'";
             System.out.println(query);
             Statement stmt = this.oracle.getConnection().createStatement();
             int code = stmt.executeUpdate(query);
@@ -102,7 +102,7 @@ public class PaisDAOImpl implements PaisDAO {
     public PaisDTO findByName(String nombre) {
         try {
             this.oracle.conectar();
-            String query = "SELECT * FROM pais_p2 WHERE nombre = '" + nombre + "';";
+            String query = "SELECT * FROM pais_p2 WHERE nombre = '" + nombre + "'";
             System.out.println(query);
             Statement stmt = this.oracle.getConnection().createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
             ResultSet rs = stmt.executeQuery(query);
@@ -131,7 +131,7 @@ public class PaisDAOImpl implements PaisDAO {
         List<PaisDTO> paisesList=new ArrayList<PaisDTO>();
         try {
             this.oracle.conectar();
-            String query = "SELECT * FROM pais_p2;";
+            String query = "SELECT * FROM pais_p2";
             System.out.println(query);
             Statement stmt = this.oracle.getConnection().createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
             ResultSet rs = stmt.executeQuery(query);
@@ -163,7 +163,7 @@ public class PaisDAOImpl implements PaisDAO {
     public Integer count() {
         try {
             this.oracle.conectar();
-            String query = "SELECT COUNT(*) FROM pais_p2;";
+            String query = "SELECT COUNT(*) FROM pais_p2";
             System.out.println(query);
             Statement stmt = this.oracle.getConnection().createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
             ResultSet rs = stmt.executeQuery(query);

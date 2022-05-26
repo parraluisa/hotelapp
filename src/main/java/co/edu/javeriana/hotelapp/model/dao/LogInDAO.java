@@ -8,4 +8,6 @@ public interface LogInDAO {
 
     public Boolean encontrarUsuario(String user, LogInDTO login);
 
+    public LogInDTO findByUser(String user);
+
 }
