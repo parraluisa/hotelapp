@@ -1,6 +1,6 @@
 .root
 {
-    -fx-background-color: #e8f4f8;
+    -fx-background-color: #ded8c5;
 }
 
 #title
@@ -9,14 +9,44 @@
     -fx-font-family: "Times New Roman";
     -fx-font-size: 40;
 }
-#parent
-{
-    -fx-alignment: center;
-}
+
 
 .label
 {
     -fx-alignment: center;
     -fx-font-size: 20;
+}
+
+#login
+{
+    -fx-background-color: #dedede;
+    -fx-border-radius: 12;
+}
+
+.text
+{
+    -fx-border-color: gray;
+}
+
+#pass_re_reg
+{
+    -fx-font-size: 18;
+}
+#reg
+{
+    -fx-background-color: #dedede;
+    -fx-border-radius: 12;
+}
+
+#iniciar:hover
+{
+    -fx-border-color: #a9a291;
+    -fx-border-width: 0px 0px 3px 3px;
+}
+
+#registrarse:hover
+{
+    -fx-border-color: #a9a291;
+    -fx-border-width: 0px 0px 3px 3px;
 }
 
