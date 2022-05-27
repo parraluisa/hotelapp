@@ -17,9 +17,6 @@ public class PaisView {
     private boolean insert=true;
     private boolean edit=false;
 
-    private boolean por;
-    private boolean imp1;
-    private boolean imp2;
 
     @FXML
     private TextField name;
@@ -108,6 +105,8 @@ public class PaisView {
         vis2(false);
         vis1(false);
         viseliminar(false);
+        name.setVisible(true);
+        tagname.setVisible(true);
         if(Porcentaje.isSelected()==true)
         {
             this.select1=true;
@@ -147,6 +146,9 @@ public class PaisView {
     @FXML
     protected void pushedit()
     {
+        String auxIVA;
+        String auxImptur;
+        String auxImpcons;
         this.nombre=name.getText();
         try
         {
@@ -160,22 +162,35 @@ public class PaisView {
         {
             System.out.println(e.getLocalizedMessage());
         }
-        if(por==true)
+        if(select1==true)
         {
             this.percent=Integer.parseInt(percentage.getText());
+            auxImptur=percentage.getText();
+        } else
+        {
+            auxImptur=null;
         }
-        if(imp1==true)
+        if(select2==true)
         {
             this.IVA=Integer.parseInt(iva.getText());
+            auxIVA=iva.getText();
+        } else
+        {
+            auxIVA=null;
         }
-        if(imp2==true)
+        if(select3==true)
         {
             this.imp=Integer.parseInt(impuesto.getText());
+            auxImpcons=impuesto.getText();
+        }
+        else
+        {
+            auxImpcons=null;
         }
 
         PaisDAO pdao=new PaisDAOImpl();
-        PaisDTO p2= pdao.findByName(nombre);
-        PaisDTO p1= pdao.edit(nombre,p2);
+        //PaisDTO pdto= new PaisDTO(nombre,auxImptur,auxIVA,auxImpcons);
+        //PaisDTO p1= pdao.edit(nombre,pdto);
         System.out.println(nombre);
         System.out.println(percent);
         System.out.println(IVA);
@@ -300,11 +315,13 @@ public class PaisView {
     @FXML
     protected void edit()
     {
-        vis1(false);
         viseliminar(false);
         vissearch(false);
         vis3(false);
         viscount(false);
+        vis1(false);
+        vis2(true);
+        submit2.setVisible(false);
         confirmar.setVisible(true);
         Porcentaje.setVisible(true);
         impuesto1.setVisible(true);
@@ -319,11 +336,11 @@ public class PaisView {
     @FXML
     protected void insertar()
     {
-        vis1(true);
         viseliminar(false);
         vis2(false);
         vissearch(false);
         vis3(false);
+        vis1(true);
         confirmar.setVisible(false);
         Porcentaje.setVisible(false);
         impuesto1.setVisible(false);
