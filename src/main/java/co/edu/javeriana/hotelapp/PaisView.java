@@ -11,6 +11,8 @@ public class PaisView {
     private int percent;
     private int IVA;
     private int imp;
+    private boolean insert=true;
+    private boolean edit=false;
 
     private boolean por;
     private boolean imp1;
@@ -42,8 +44,10 @@ public class PaisView {
     private Button Submit;
     @FXML
     private Button confirmar;
+
     @FXML
     private Button submit2;
+
 
 
     protected void vis1(boolean bool)
@@ -68,18 +72,23 @@ public class PaisView {
         vis2(false);
         if(Porcentaje.isSelected()==true)
         {
+
             this.por=true;
+
             percentage.setVisible(true);
             p.setVisible(true);
         }
         if(impuesto1.isSelected()==true)
         {
+
             this.imp1=true;
+
             i.setVisible(true);
             iva.setVisible(true);
         }
         if(impuesto2.isSelected()==true)
         {
+
             this.imp2=true;
             im.setVisible(true);
             impuesto.setVisible(true);
@@ -120,6 +129,7 @@ public class PaisView {
         System.out.println(percent);
         System.out.println(IVA);
         System.out.println(imp);
+
     }
 
     @FXML
@@ -134,6 +144,7 @@ public class PaisView {
         controller.setText("Porfavor filtre sus resultados para modificar un valor en la base de datos");
     }
 
+
     @FXML
     protected void insertar()
     {
@@ -145,6 +156,7 @@ public class PaisView {
         controller.setText("Porfavor insertar los datos para agregar el país a la base de datos");
 
     }
+
 
     @FXML
     protected void getinsert()
