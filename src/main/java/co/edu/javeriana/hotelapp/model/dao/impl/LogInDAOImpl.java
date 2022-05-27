@@ -2,7 +2,6 @@ package co.edu.javeriana.hotelapp.model.dao.impl;
 
 import co.edu.javeriana.hotelapp.model.dao.LogInDAO;
 import co.edu.javeriana.hotelapp.model.dto.LogInDTO;
-import co.edu.javeriana.hotelapp.model.dto.PaisDTO;
 import co.edu.javeriana.hotelapp.util.Oracle;
 
 import java.sql.*;
@@ -91,7 +90,7 @@ public class LogInDAOImpl implements LogInDAO {
                 return null;
             }
         } catch (SQLException ex) {
-            Logger.getLogger(PaisDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(LogInDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
     }
