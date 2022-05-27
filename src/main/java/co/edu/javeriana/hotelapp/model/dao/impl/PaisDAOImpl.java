@@ -52,7 +52,7 @@ public class PaisDAOImpl implements PaisDAO {
         try {
             this.oracle.conectar();
             String query = "update pais_p2 set "
-                    +"nombre ="+ pais.getNombre()+","
+                    +"nombre ='"+ pais.getNombre()+"',"
                     +" imptur ="+ "'" + pais.getImpNacTur() + "',"
                     +"iva ="+ "'" + pais.getIva() + "',"
                     +"impcons ="+ "'" + pais.getImpCons() + "' where nombre ='"+nombre+"'";

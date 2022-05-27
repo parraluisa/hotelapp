@@ -37,7 +37,7 @@
         <Button fx:id="reg" layoutX="474.0" layoutY="515.0" mnemonicParsing="false" onMouseClicked="#gettext_reg" styleClass="text" text="Register!" visible="false" />
       <Label fx:id="error_log" layoutX="380.0" layoutY="510" text="Label" visible="false" />
         <Label fx:id="error_reg" layoutX="380" layoutY="550.0" text="Label" visible="false" />
-      <Button layoutX="476.0" layoutY="672.0" mnemonicParsing="false" text="Button" onMouseClicked="#pais"/>
+      <Button layoutX="476.0" layoutY="672.0" mnemonicParsing="false" text="Exit" onMouseClicked="#exit"/>
 
 
     </children>

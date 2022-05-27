@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.javeriana.hotelapp.PaisView">
+<AnchorPane prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.javeriana.hotelapp.PaisView">
    <children>
       <ImageView fitHeight="115.0" fitWidth="115.0" layoutX="-8.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="-8.0">
          <image>
@@ -20,16 +20,18 @@
       <Pane layoutX="15.0" layoutY="120" prefHeight="645.0" prefWidth="79.0" styleClass="pane">
          <children>
 
-            <Button layoutX="14.0" layoutY="75" mnemonicParsing="false" text="Insert" onMouseClicked="#insertar"/>
+            <Button layoutX="14.0" layoutY="75" mnemonicParsing="false" onMouseClicked="#insertar" text="Insert" />
 
-            <Button layoutX="14.0" layoutY="236.25" mnemonicParsing="false" onMouseClicked="#edit" text="Edit" />
-            <Button layoutX="14.0" layoutY="397.5" mnemonicParsing="false" text="Button" />
-            <Button layoutX="14.0" layoutY="558.75" mnemonicParsing="false" text="Button" />
+            <Button layoutX="14.0" layoutY="149.0" mnemonicParsing="false" onMouseClicked="#edit" text="Edit" />
+            <Button layoutX="10.0" layoutY="247.0" mnemonicParsing="false" onMouseClicked="#eliminar" text="Eliminar" />
+            <Button layoutX="14.0" layoutY="362.0" mnemonicParsing="false" onMouseClicked="#buscar" text="Buscar" />
+            <Button fx:id="contar" layoutX="14.0" layoutY="454.0" mnemonicParsing="false" onMouseClicked="#Count" text="Contar" />
+            <Button fx:id="mostrar" layoutX="11.0" layoutY="551.0" mnemonicParsing="false" text="Mostrar" />
          </children>
       </Pane>
       <Pane layoutX="328.0" layoutY="180.0" prefHeight="529.0" prefWidth="629.0" styleClass="pane">
          <children>
-            <Label layoutX="29.0" layoutY="86.0" styleClass="lid" text="Nombre" />
+            <Label fx:id="tagname" layoutX="29.0" layoutY="86.0" styleClass="lid" text="Nombre" />
             <TextField fx:id="name" layoutX="176.0" layoutY="82.0" styleClass="text" />
             <Label fx:id="p" layoutX="29.0" layoutY="159.0" styleClass="lid" text="Porcentaje impuesto" />
             <TextField fx:id="percentage" layoutX="176.0" layoutY="155.0" styleClass="text" />
@@ -37,16 +39,27 @@
             <TextField fx:id="iva" layoutX="176.0" layoutY="228.0" styleClass="text" />
             <Label fx:id="im" layoutX="28.0" layoutY="305.0" styleClass="lid" text="Impuesto cons" />
             <TextField fx:id="impuesto" layoutX="175.0" layoutY="301.0" styleClass="text" />
-            <Button layoutX="224.0" layoutY="389.0" mnemonicParsing="false" onMouseClicked="#getinsert" text="Submit" fx:id="Submit"/>
+            <Button fx:id="Submit" layoutX="224.0" layoutY="389.0" mnemonicParsing="false" onMouseClicked="#getinsert" text="Submit" />
             <Label fx:id="controller" layoutX="33.0" layoutY="23.0" text="Porfavor insertar los datos para agregar el país a la base de datos" />
             <RadioButton fx:id="Porcentaje" layoutX="29.0" layoutY="159.0" mnemonicParsing="false" text="Porcentaje" visible="false" />
             <RadioButton fx:id="impuesto1" layoutX="206.0" layoutY="159.0" mnemonicParsing="false" text="IVA" visible="false" />
             <RadioButton fx:id="impuesto2" layoutX="378.0" layoutY="159.0" mnemonicParsing="false" text="Porcentaje cons" visible="false" />
-            <Button layoutX="223.0" layoutY="203.0" mnemonicParsing="false" text="Confirmar" visible="false" fx:id="confirmar" onMouseClicked="#confirmar"/>
+            <Button fx:id="confirmar" layoutX="223.0" layoutY="203.0" mnemonicParsing="false" onMouseClicked="#confirmar" text="Confirmar" visible="false" />
 
-            <Button layoutX="224.0" layoutY="389.0" mnemonicParsing="false" onMouseClicked="#pushedit" text="Submit" fx:id="submit2" visible="false"/>
+            <Button fx:id="submit2" layoutX="224.0" layoutY="389.0" mnemonicParsing="false" onMouseClicked="#pushedit" text="Submit" visible="false" />
+            <Button fx:id="delete" layoutX="225.0" layoutY="134.0" mnemonicParsing="false" onMouseClicked="#DELETE" text="Eliminar" visible="false" />
+            <Button fx:id="fuck" layoutX="220.0" layoutY="122.0" mnemonicParsing="false" onMouseClicked="#search" text="Search" visible="false" />
+            <Label fx:id="tag" layoutX="53.0" layoutY="200.0" prefHeight="25.0" prefWidth="149.0" text="Label" visible="false" />
+            <Label fx:id="tag1" layoutX="53.0" layoutY="300.0" prefHeight="25.0" prefWidth="149.0" text="Label" visible="false" />
+            <Label fx:id="tag2" layoutX="53.0" layoutY="400.0" prefHeight="25.0" prefWidth="149.0" text="Label" visible="false" />
+            <Label fx:id="tag3" layoutX="53.0" layoutY="500.0" prefHeight="25.0" prefWidth="149.0" text="Label" visible="false" />
+            <Label fx:id="result1" layoutX="200.0" layoutY="200.0" prefHeight="25.0" prefWidth="149.0" text="Label" visible="false" />
+            <Label fx:id="result2" layoutX="200.0" layoutY="300.0" prefHeight="25.0" prefWidth="149.0" text="Label" visible="false" />
+            <Label fx:id="result3" layoutX="200.0" layoutY="400.0" prefHeight="25.0" prefWidth="149.0" text="Label" visible="false" />
+            <Label fx:id="result4" layoutX="200.0" layoutY="500.0" prefHeight="25.0" prefWidth="149.0" text="Label" visible="false" />
+
 
          </children></Pane>
-      <Button layoutX="474.0" layoutY="753.0" mnemonicParsing="false" onMouseClicked="#exit" text="Exit" />
+      <Button layoutX="207.0" layoutY="614.0" mnemonicParsing="false" onMouseClicked="#exit" text="Exit" />
    </children>
 </AnchorPane>

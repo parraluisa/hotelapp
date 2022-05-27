@@ -44,7 +44,7 @@ public class LogInDAOImpl implements LogInDAO {
         Boolean res=false;
         try {
             this.oracle.conectar();
-            String query = "SELECT * FROM login_p2 WHERE user = '" + user + "'";
+            String query = "SELECT * FROM login_p2 WHERE usuario = '" + user + "'";
             System.out.println(query);
             Statement stmt = this.oracle.getConnection().createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
             ResultSet rs = stmt.executeQuery(query);
