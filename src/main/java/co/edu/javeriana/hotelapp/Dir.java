@@ -45,4 +45,9 @@ public class Dir {
             System.out.println(e.getLocalizedMessage());
         }
     }
+    @FXML
+    protected void exit()
+    {
+        System.exit(0);
+    }
 }

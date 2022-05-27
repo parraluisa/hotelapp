@@ -77,6 +77,7 @@ public class HelloController {
             if(p2==true)
             {
                 System.out.println("Success");
+                dir();
             }
             else
             {
@@ -137,6 +138,12 @@ public class HelloController {
         System.out.println(username_reg);
         System.out.println(password_reg);
         System.out.println(re_password_reg);
+    }
+
+    @FXML
+    protected void exit()
+    {
+        System.exit(0);
     }
     @FXML
     protected void vis_log()
@@ -218,8 +225,8 @@ public class HelloController {
         }
     }
 
-    @FXML
-    protected void pais() throws IOException {
+
+    protected void dir() throws IOException {
         try
         {
             Parent root = FXMLLoader.load(HelloApplication.class.getResource("dir.fxml"));

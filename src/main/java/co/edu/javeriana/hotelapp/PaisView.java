@@ -1,5 +1,8 @@
 package co.edu.javeriana.hotelapp;
 
+import co.edu.javeriana.hotelapp.model.dao.PaisDAO;
+import co.edu.javeriana.hotelapp.model.dao.impl.PaisDAOImpl;
+import co.edu.javeriana.hotelapp.model.dto.PaisDTO;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -20,6 +23,9 @@ public class PaisView {
 
     @FXML
     private TextField name;
+
+    @FXML
+    private Button delete;
     @FXML
     private TextField iva;
     @FXML
@@ -125,11 +131,110 @@ public class PaisView {
         {
             this.imp=0;
         }
+
+        PaisDAO pdao=new PaisDAOImpl();
+        PaisDTO p2= pdao.findByName(nombre);
+        PaisDTO p1= pdao.edit(nombre,p2);
         System.out.println(nombre);
         System.out.println(percent);
         System.out.println(IVA);
         System.out.println(imp);
 
+    }
+
+    @FXML
+    protected void eliminar()
+    {
+        vis1(false);
+        vis2(false);
+        delete.setVisible(true);
+    }
+
+    @FXML
+    protected void DELETE()
+    {
+        this.nombre=name.getText();
+        PaisDAO pdao = new PaisDAOImpl();
+        Boolean p1= pdao.delete(nombre);
+        if(p1==true){
+            System.out.println("se pudo eliminar el pais");
+        }
+        else {
+            System.out.println("algo paso y no se pudo");
+        }
+        System.out.println("Success");
+    }
+    @FXML
+    protected void buscar()
+    {
+        vis1(false);
+        vis2(false);
+        fuck.setVisible(true);
+    }
+    @FXML
+    private Button fuck;
+    @FXML
+    private Label result;
+
+    @FXML
+    private Label tag;
+    @FXML
+    private Label tag1;
+    @FXML
+    private Label tag2;
+    @FXML
+    private Label tag3;
+    @FXML
+    private Label result1;
+    @FXML
+    private Label result2;
+    @FXML
+    private Label result3;
+    @FXML
+    private Label result4;
+
+    protected void vis3(boolean b)
+    {
+        tag.setVisible(b);
+        tag1.setVisible(b);
+        tag2.setVisible(b);
+        tag3.setVisible(b);
+        result1.setVisible(b);
+        result2.setVisible(b);
+        result3.setVisible(b);
+        result4.setVisible(b);
+    }
+
+    @FXML
+    protected void search()
+    {
+        this.nombre=name.getText();
+        PaisDAO pdao=new PaisDAOImpl();
+        PaisDTO p1=pdao.findByName(nombre);
+        vis3(true);
+        tag.setText("Pais: ");
+        tag1.setText("Impuesto NAC.turismo: ");
+        tag2.setText("IVA: ");
+        tag3.setText("Impuesto consumidor: ");
+        result1.setText(p1.getNombre());
+        result2.setText(String.valueOf((p1.getImpNacTur())));
+        result3.setText(String.valueOf(p1.getIva()));
+        result4.setText(String.valueOf(p1.getImpCons()));
+
+    }
+
+    @FXML
+    private Label tagname;
+    @FXML
+    protected void Count()
+    {
+        PaisDAO pdao= new PaisDAOImpl();
+        int cant=pdao.count();
+        tagname.setText("La cantidad de paises son: " + cant);
+        name.setVisible(false);
+        vis1(false);
+        vis2(false);
+        vis3(false);
     }
 
     @FXML
@@ -141,6 +246,9 @@ public class PaisView {
         impuesto1.setVisible(true);
         impuesto2.setVisible(true);
         this.nombre=name.getText();
+        PaisDAO pdao= new PaisDAOImpl();
+        PaisDTO p1=pdao.findByName(nombre);
+
         controller.setText("Porfavor filtre sus resultados para modificar un valor en la base de datos");
     }
 
@@ -171,6 +279,10 @@ public class PaisView {
             this.IVA=Integer.parseInt(iva.getText());
             this.imp=Integer.parseInt(impuesto.getText());
             this.percent=Integer.parseInt(percentage.getText());
+           PaisDTO pais=new PaisDTO(nombre,imp,IVA,percent);
+            PaisDAO pdao =new PaisDAOImpl();
+            PaisDTO pa=pdao.create(pais);
+
 
         }
         catch (Exception e)
