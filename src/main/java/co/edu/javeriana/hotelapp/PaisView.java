@@ -17,9 +17,6 @@ public class PaisView {
     private boolean insert=true;
     private boolean edit=false;
 
-    private boolean por;
-    private boolean imp1;
-    private boolean imp2;
 
     @FXML
     private TextField name;
@@ -58,6 +55,8 @@ public class PaisView {
 
     protected void vis1(boolean bool)
     {
+        tagname.setVisible(bool);
+        name.setVisible(bool);
         im.setVisible(bool);
         i.setVisible(bool);
         p.setVisible(bool);
@@ -68,73 +67,130 @@ public class PaisView {
     }
     protected void vis2(boolean bool)
     {
+        tagname.setVisible(bool);
+        name.setVisible(bool);
+        confirmar.setVisible(bool);
         Porcentaje.setVisible(bool);
         impuesto1.setVisible(bool);
         impuesto2.setVisible(bool);
+        submit2.setVisible(bool);
     }
+
+    protected void viseliminar(boolean b)
+    {
+        tagname.setVisible(b);
+        name.setVisible(b);
+        delete.setVisible(b);
+    }
+
+    protected void vissearch(boolean b)
+    {
+        tagname.setVisible(b);
+        name.setVisible(b);
+        fuck.setVisible(b);
+    }
+
+    protected void viscount(boolean b)
+    {
+        searchtag.setVisible(b);
+    }
+
+    private boolean select1=false;
+    private boolean select2=false;
+    private boolean select3=false;
+
     @FXML
     protected void confirmar()
     {
         vis2(false);
+        vis1(false);
+        viseliminar(false);
+        name.setVisible(true);
+        tagname.setVisible(true);
         if(Porcentaje.isSelected()==true)
         {
-
-            this.por=true;
-
+            this.select1=true;
             percentage.setVisible(true);
             p.setVisible(true);
+            confirmar.setVisible(false);
+            submit2.setVisible(true);
+            i.setText("IVA");
         }
         if(impuesto1.isSelected()==true)
         {
 
-            this.imp1=true;
-
+            this.select2=true;
             i.setVisible(true);
             iva.setVisible(true);
+            confirmar.setVisible(false);
+            submit2.setVisible(true);
+            i.setText("IVA");
         }
         if(impuesto2.isSelected()==true)
         {
-
-            this.imp2=true;
+            this.select3=true;
             im.setVisible(true);
             impuesto.setVisible(true);
+            confirmar.setVisible(false);
+            submit2.setVisible(true);
+            i.setText("IVA");
         }
-        confirmar.setVisible(false);
-        submit2.setVisible(true);
+        if(select1==false && select2==false && select3==false)
+        {
+            vis2(true);
+            i.setVisible(true);
+            i.setText("Fatal error! please select a search filter");
+        }
     }
 
     @FXML
     protected void pushedit()
     {
+        String auxIVA;
+        String auxImptur;
+        String auxImpcons;
         this.nombre=name.getText();
-        if(por==true)
+        try
+        {
+            if(name.getText().equals(""))
+            {
+
+                throw new Exception("Please enter the name of the country");
+            }
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getLocalizedMessage());
+        }
+        if(select1==true)
         {
             this.percent=Integer.parseInt(percentage.getText());
-        }
-        if(por==false)
+            auxImptur=percentage.getText();
+        } else
         {
-            this.percent=0;
+            auxImptur=null;
         }
-        if(imp1==true)
+        if(select2==true)
         {
             this.IVA=Integer.parseInt(iva.getText());
-        }
-        if(imp1==false)
+            auxIVA=iva.getText();
+        } else
         {
-            this.IVA=0;
+            auxIVA=null;
         }
-        if(imp2==true)
+        if(select3==true)
         {
             this.imp=Integer.parseInt(impuesto.getText());
+            auxImpcons=impuesto.getText();
         }
-        if(imp2==false)
+        else
         {
-            this.imp=0;
+            auxImpcons=null;
         }
 
         PaisDAO pdao=new PaisDAOImpl();
-        PaisDTO p2= pdao.findByName(nombre);
-        PaisDTO p1= pdao.edit(nombre,p2);
+        //PaisDTO pdto= new PaisDTO(nombre,auxImptur,auxIVA,auxImpcons);
+        //PaisDTO p1= pdao.edit(nombre,pdto);
         System.out.println(nombre);
         System.out.println(percent);
         System.out.println(IVA);
@@ -147,7 +203,10 @@ public class PaisView {
     {
         vis1(false);
         vis2(false);
-        delete.setVisible(true);
+        vis3(false);
+        vissearch(false);
+        viseliminar(true);
+        viscount(false);
     }
 
     @FXML
@@ -169,7 +228,10 @@ public class PaisView {
     {
         vis1(false);
         vis2(false);
-        fuck.setVisible(true);
+        viseliminar(false);
+        vissearch(true);
+        viscount(false);
+
     }
     @FXML
     private Button fuck;
@@ -208,6 +270,10 @@ public class PaisView {
     @FXML
     protected void search()
     {
+        vis3(false);
+        vis1(false);
+        viseliminar(false);
+        vis2(false);
         this.nombre=name.getText();
         PaisDAO pdao=new PaisDAOImpl();
         PaisDTO p1=pdao.findByName(nombre);
@@ -225,22 +291,37 @@ public class PaisView {
 
     @FXML
     private Label tagname;
+
+    @FXML
+    private Label searchtag;
+
     @FXML
     protected void Count()
     {
-        PaisDAO pdao= new PaisDAOImpl();
-        int cant=pdao.count();
-        tagname.setText("La cantidad de paises son: " + cant);
-        name.setVisible(false);
         vis1(false);
         vis2(false);
         vis3(false);
+        viseliminar(false);
+        vissearch(false);
+        viscount(true);
+        PaisDAO pdao= new PaisDAOImpl();
+        int cant=pdao.count();
+        searchtag.setText("La cantidad de paises son: " + cant);
+        tagname.setVisible(false);
+        name.setVisible(false);
+
     }
 
     @FXML
     protected void edit()
     {
+        viseliminar(false);
+        vissearch(false);
+        vis3(false);
+        viscount(false);
         vis1(false);
+        vis2(true);
+        submit2.setVisible(false);
         confirmar.setVisible(true);
         Porcentaje.setVisible(true);
         impuesto1.setVisible(true);
@@ -248,7 +329,6 @@ public class PaisView {
         this.nombre=name.getText();
         PaisDAO pdao= new PaisDAOImpl();
         PaisDTO p1=pdao.findByName(nombre);
-
         controller.setText("Porfavor filtre sus resultados para modificar un valor en la base de datos");
     }
 
@@ -256,6 +336,10 @@ public class PaisView {
     @FXML
     protected void insertar()
     {
+        viseliminar(false);
+        vis2(false);
+        vissearch(false);
+        vis3(false);
         vis1(true);
         confirmar.setVisible(false);
         Porcentaje.setVisible(false);
@@ -265,25 +349,46 @@ public class PaisView {
 
     }
 
+    @FXML
+    private Label confirmation;
 
     @FXML
-    protected void getinsert()
-    {
+    protected void getinsert() throws Exception {
+        this.nombre=name.getText();
         try
         {
-            this.nombre=name.getText();
             if(nombre.equals(""))
             {
+                confirmation.setVisible(true);
+                confirmation.setText("Cannot leave Name in blank");
                 throw new Exception("Cannot leave name in blank");
+            }
+            if(iva.getText().equals(""))
+            {
+                confirmation.setVisible(true);
+                confirmation.setText("Cannot leave IVA in blank");
+                throw new Exception("Cannot leave IVA in blank");
+            }
+            if(impuesto.getText().equals(""))
+            {
+                confirmation.setVisible(true);
+                confirmation.setText("Cannot leave tax in blank");
+                throw new Exception("Cannot leave tax in blank");
+            }
+            if(percentage.getText().equals(""))
+            {
+                confirmation.setVisible(true);
+                confirmation.setText("Cannot leave Percentage in blank");
+                throw new Exception("Cannot leave Percentage in blank");
             }
             this.IVA=Integer.parseInt(iva.getText());
             this.imp=Integer.parseInt(impuesto.getText());
             this.percent=Integer.parseInt(percentage.getText());
-           PaisDTO pais=new PaisDTO(nombre,imp,IVA,percent);
+            PaisDTO pais=new PaisDTO(nombre,imp,IVA,percent);
             PaisDAO pdao =new PaisDAOImpl();
             PaisDTO pa=pdao.create(pais);
-
-
+            confirmation.setVisible(true);
+            confirmation.setText("La adición fue un exito!");
         }
         catch (Exception e)
         {

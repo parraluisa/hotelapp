@@ -5,6 +5,7 @@ import co.edu.javeriana.hotelapp.model.dao.impl.LogInDAOImpl;
 import co.edu.javeriana.hotelapp.model.dto.LogInDTO;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -12,6 +13,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -112,12 +116,22 @@ public class HelloController {
            }
            if(password_reg.equals(re_password_reg))
            {
-               error_reg.setVisible(false);
                try
                {
                    LogInDTO logdto= new LogInDTO(username_reg.toString(),password_reg.toString());
                    LogInDAO logdao= new LogInDAOImpl();
-                   LogInDTO p2= logdao.create(logdto);
+                   boolean fuckshit=logdao.encontrarUsuario(username_reg.toString(),logdto);
+                   if(fuckshit==true)
+                   {
+                        throw new Exception("User already in use");
+                   }
+                   else
+                   {
+                       System.out.println("Sucess");
+                       error_reg.setVisible(true);
+                       error_reg.setBackground(new Background(new BackgroundFill(Color.WHITE,null, Insets.EMPTY)));
+                       error_reg.setText("Thanks for your registration, you're all set");
+                   }
                }
                catch (Exception e)
                {
