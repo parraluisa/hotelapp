@@ -10,4 +10,6 @@ public interface LogInDAO {
 
     public LogInDTO findByUser(String user);
 
+    public Boolean compReg(String usuario);
+
 }

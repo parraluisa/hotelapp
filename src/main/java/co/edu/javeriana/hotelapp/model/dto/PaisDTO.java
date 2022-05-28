@@ -14,7 +14,27 @@ public class PaisDTO {
         this.iva = iva;
         this.impCons = impCons;
     }
-
+    public PaisDTO(String nombre, String impNacTur, String iva, String impCons) {
+        this.nombre = nombre;
+        if (impNacTur!=null){
+            this.impNacTur = Integer.parseInt(impNacTur);
+        }
+        else{
+            this.impNacTur=-1;
+        }
+        if (iva!= null){
+            this.iva = Integer.parseInt(iva);
+        }
+        else {
+            this.iva=-1;
+        }
+        if(impCons!=null){
+            this.impCons = Integer.parseInt(impCons);
+        }
+        else {
+            this.impCons=-1;
+        }
+    }
     public String getNombre() {
         return nombre;
     }

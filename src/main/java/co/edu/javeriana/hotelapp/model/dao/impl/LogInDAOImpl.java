@@ -49,12 +49,12 @@ public class LogInDAOImpl implements LogInDAO {
             Statement stmt = this.oracle.getConnection().createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
             ResultSet rs = stmt.executeQuery(query);
             if (rs.first()) {
-                LogInDTO Log = new LogInDTO(
+                LogInDTO log = new LogInDTO(
                         rs.getString("usuario"),
                         rs.getString("contrasenia"));
                 rs.close();
                 stmt.close();
-                if (login.equals(Log)) {
+                if (login.equals(log)) {
                     res=true;
                 }
             } else {
@@ -93,6 +93,34 @@ public class LogInDAOImpl implements LogInDAO {
             Logger.getLogger(LogInDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
+    }
+
+    @Override
+    public Boolean compReg(String user) {
+        Boolean res=false;
+        try {
+            this.oracle.conectar();
+            String query = "SELECT usuario FROM login_p2 WHERE usuario = '" + user + "'";
+            System.out.println(query);
+            Statement stmt = this.oracle.getConnection().createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            ResultSet rs = stmt.executeQuery(query);
+            if (rs.first()) {
+                String usuario=rs.getString("usuario");
+                rs.close();
+                stmt.close();
+                if (usuario.equalsIgnoreCase(user)){
+                    res=true;
+                }
+            } else {
+                rs.close();
+                stmt.close();
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(LogInDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+
+        return res;
     }
 
 }

@@ -189,8 +189,8 @@ public class PaisView {
         }
 
         PaisDAO pdao=new PaisDAOImpl();
-        //PaisDTO pdto= new PaisDTO(nombre,auxImptur,auxIVA,auxImpcons);
-        //PaisDTO p1= pdao.edit(nombre,pdto);
+        PaisDTO pdto= new PaisDTO(nombre,auxImptur,auxIVA,auxImpcons);
+        PaisDTO p1= pdao.edit(nombre,pdto);
         System.out.println(nombre);
         System.out.println(percent);
         System.out.println(IVA);
