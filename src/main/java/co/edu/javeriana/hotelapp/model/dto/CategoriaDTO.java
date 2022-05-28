@@ -10,6 +10,16 @@ public class CategoriaDTO {
         this.descripcion = descripcion;
         this.sobrecosto = sobrecosto;
     }
+    public CategoriaDTO(Integer numEstrellas, String descripcion, String sobrecosto) {
+        this.numEstrellas = numEstrellas;
+        this.descripcion = descripcion;
+        if(sobrecosto!=null){
+            this.sobrecosto = Float.parseFloat(sobrecosto);
+        }
+        else {
+            this.sobrecosto=-1;
+        }
+    }
 
     public Integer getNumEstrellas() {
         return numEstrellas;

@@ -52,10 +52,18 @@ public class CategoriaDAOimpl implements CategoriaDAO {
     public CategoriaDTO edit(Integer numEstrellas, CategoriaDTO categoria) {
         try {
             this.oracle.conectar();
+            CategoriaDAO cdao=new CategoriaDAOimpl();
+            CategoriaDTO cat=cdao.findByNum(numEstrellas);
+            if (categoria.getDescripcion()!=null){
+                cat.setDescripcion(categoria.getDescripcion());
+            }
+            if(categoria.getSobrecosto()!=-1){
+                cat.setSobrecosto(categoria.getSobrecosto());
+            }
             String query = "update categoria_p2 set "
-                    +"estrellas ="+ categoria.getNumEstrellas()+","
-                    +" descripcion ="+ "'" + categoria.getDescripcion() + "',"
-                    +"sobrecosto ="+ "'" + categoria.getSobrecosto() + "' where estrellas ="+numEstrellas;
+                    +" descripcion ="+ "'" + cat.getDescripcion() + "',"
+                    +"sobrecosto ="+ "'" + cat.getSobrecosto() + "' where estrellas ="+numEstrellas;
+
             System.out.println(query);
             Statement stmt = this.oracle.getConnection().createStatement();
             int code = stmt.executeUpdate(query);
@@ -63,13 +71,14 @@ public class CategoriaDAOimpl implements CategoriaDAO {
             this.oracle.desconectar();
             switch (code) {
                 case 1:
-                    System.out.println("Se actualizo la categoria");
-                    return findByNum(categoria.getNumEstrellas());
+                    System.out.println("Se actualizo la categoria" +
+                            "");
+                    return findByNum(cat.getNumEstrellas());
                 default:
                     return null;
             }
         } catch (SQLException ex) {
-            Logger.getLogger(CategoriaDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CategoriaDAOimpl.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
 

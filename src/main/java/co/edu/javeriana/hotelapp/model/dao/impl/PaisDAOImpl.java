@@ -48,11 +48,23 @@ public class PaisDAOImpl implements PaisDAO {
     }
 
     @Override
-    public PaisDTO edit(String nombre, PaisDTO pais) {
+    public PaisDTO edit(String nombre, PaisDTO p) {
         try {
             this.oracle.conectar();
+
+            PaisDAO pdao=new PaisDAOImpl();
+            PaisDTO pais=pdao.findByName(nombre);
+            if (p.getImpNacTur()!=-1){
+                pais.setImpNacTur(p.getImpNacTur());
+            }
+            if(p.getIva()!=-1){
+                pais.setIva(p.getIva());
+            }
+            if(p.getImpCons()!=-1){
+                pais.setImpCons(p.getImpCons());
+            }
+
             String query = "update pais_p2 set "
-                    +"nombre ='"+ pais.getNombre()+"',"
                     +" imptur ="+ "'" + pais.getImpNacTur() + "',"
                     +"iva ="+ "'" + pais.getIva() + "',"
                     +"impcons ="+ "'" + pais.getImpCons() + "' where nombre ='"+nombre+"'";
