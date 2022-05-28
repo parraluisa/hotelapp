@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.javeriana.hotelapp.categoria">
+<AnchorPane prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.javeriana.hotelapp.categoria">
     <children>
         <ImageView fitHeight="115.0" fitWidth="115.0" layoutX="-8.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="-8.0">
             <image>
@@ -44,6 +44,8 @@
             <Button layoutX="225.0" layoutY="180.0" mnemonicParsing="false" text="Confirmar" visible="false" />
             <Button fx:id="shit" layoutX="234.0" layoutY="155.0" mnemonicParsing="false" onMouseClicked="#errase" text="Eliminar" visible="false" />
                 <Button fx:id="search" layoutX="234.0" layoutY="155.0" mnemonicParsing="false" onMouseClicked="#mrda" text="Buscar" visible="false" />
+            <Label fx:id="Fuckshit" layoutX="233.0" layoutY="184.0" text="Label" visible="false" />
+            <Label fx:id="hola" layoutX="233.0" layoutY="232.0" text="Label" visible="false"/>
 
             </children></Pane>
         <Button layoutX="164.0" layoutY="560.0" mnemonicParsing="false" onMouseClicked="#exit" text="Exit" />

@@ -101,11 +101,20 @@ private Button shit;
     private Button search;
 
     @FXML
+    private Label Fuckshit;
+
+    @FXML
+    private Label hola;
+    @FXML
     protected void mrda()
     {
         this.num_estrellas=Integer.parseInt(estrella.getText());
         CategoriaDAO cdao=new CategoriaDAOimpl();
         CategoriaDTO c1=cdao.findByNum(num_estrellas);
+        Fuckshit.setVisible(true);
+        Fuckshit.setText(c1.getDescripcion());
+        hola.setVisible(true);
+        hola.setText(String.valueOf(c1.getSobrecosto()));
     }
     @FXML
     protected void look()
